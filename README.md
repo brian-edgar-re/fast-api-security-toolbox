@@ -75,11 +75,6 @@ To set up the project for local development, follow these steps:
    - Swagger UI: [http://127.0.0.1:8080/docs](http://127.0.0.1:8080/docs)
    - ReDoc: [http://127.0.0.1:8080/redoc](http://127.0.0.1:8080/redoc)
 
-### Example Commands for Testing
-
-You can test the API endpoints with `curl` commands or a tool like Postman. Refer to the **Example Requests** section above for example requests you can try locally.
-
-
 ## Makefile Commands
 
 The `Makefile` provides an easy way to manage the Docker container for this application. Available commands include:
