@@ -1,0 +1,18 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: fastapi-app-hpa  # Nombre del HPA, asociado al Deployment que escalará.
+spec:
+  scaleTargetRef:  # Indica qué recurso se va a escalar.
+    apiVersion: apps/v1  # Versión de la API del recurso objetivo (Deployment en este caso).
+    kind: Deployment  # Tipo de recurso que se escalará.
+    name: fastapi-app  # Nombre del Deployment que será escalado.
+  minReplicas: 2  # Número mínimo de réplicas que se mantendrán siempre activas.
+  maxReplicas: 10  # Número máximo de réplicas que se pueden crear para manejar la carga.
+  metrics:  # Lista de métricas utilizadas para decidir cuándo escalar.
+  - type: Resource
+    resource:
+      name: cpu  # El recurso monitoreado será el uso de CPU.
+      target:
+        type: Utilization
+        averageUtilization: 50  # Objetivo de utilización promedio del CPU en todos los Pods (50%).

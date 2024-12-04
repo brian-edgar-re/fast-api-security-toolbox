@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  # these are the metadata of the deployment (labels, for example, associated with the deployment).
+  name: fastapi-app
+  labels:
+    app: fastapi-app
+spec:
+  replicas: 3
+  selector:  # these are the matched pods which this deployment will manage, based on the labels.
+    matchLabels:
+      app: fastapi-app
+  template:
+    metadata:  # these are the metadata that the below defined pods will have.
+      labels:
+        app: fastapi-app
+    spec:
+      containers:  # these are the defined pods for the deployment.
+      - name: fastapi-container
+        image: brianedgarre/security_toolbox:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "250m"
+          limits:
+            cpu: "500m"
+        envFrom:
+        - secretRef:
+            name: fastapi-secrets  # defined in the secret.yaml file.
